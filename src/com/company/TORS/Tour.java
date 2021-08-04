@@ -16,6 +16,10 @@ public class Tour {
         this.destination = destination;
     }
 
+    public Tour(){
+
+    }
+
     public String getDescription() {
         return description;
     }

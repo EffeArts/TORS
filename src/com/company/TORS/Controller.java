@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Controller {
     private static List<Tour> tours = new ArrayList<Tour>();
     private static List<Destination> destinations = new ArrayList<Destination>();
+    private static Reservation reservation = new Reservation();
+
 
     public static void home(){
         System.out.println("Welcome to TORS!!");
@@ -29,7 +31,7 @@ public class Controller {
         Tour selectedTour = select(tourSelection);
         System.out.println();
 
-        makeReservation(selectedTour);
+        reservation.createReservation(selectedTour);
 
     }
 
@@ -69,39 +71,4 @@ public class Controller {
         return selectedTour;
     }
 
-    public static void makeReservation(Tour tour){
-        Scanner keys = new Scanner(System.in);
-        Scanner confi = new Scanner(System.in);
-        char confirmation = 'n';
-
-        String names = "";
-        String email= "";
-
-        while(confirmation != 'y'){
-            System.out.println("Enter your full name for reservation: ");
-            names = keys.nextLine();
-
-            System.out.println("Enter your email: ");
-            email = keys.nextLine();
-
-            System.out.println("Full names: " + names);
-            System.out.println("Email: " + email);
-
-            System.out.println("Please confirm the information below before approving your reservation: (y for yes)");
-            confirmation = confi.next().charAt(0);
-        }
-
-        User user = new User(1, names, email);
-        Reservation reservation = new Reservation(1, "08/04/2021", user, tour);
-
-        System.out.println("Your reservation has been succesfully created");
-        System.out.println(reservation);
-
-        notifyAgency(reservation);
-
-    }
-
-    public static void notifyAgency(Reservation res){
-        System.out.println("Agency has been notified!");
-    }
 }
